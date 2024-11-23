@@ -2,21 +2,21 @@
 // custom
 
 export const metadata = {
-  title: "Docs!!",
-  description: "Coming Soon!",
-  keywords: "Hello Word",
+  title: "S Z - D O C S",
+  description: "S A N Z - R E S T - A P I",
+  keywords: "rest api bot wa",
   openGraph: {
-    title: "balxzzy - REST API Documentation",
+    title: "SANZ - REST API Documentation",
     description:
-      "balxzzy is a free, simple REST API created by balxzzy for the common good. Feel free to use it, but please avoid DDoS attacks.",
-    url: "https://api.balxzzy.xyz",
+      "Sanz is a free, simple REST API created by balxzzy for the common good. Feel free to use it, but please avoid DDoS attacks.",
+    url: "https://swagger-nextjs-api.vercel.app/docs",
     type: "website",
     images: [
       {
         url: "https://nyimpen.vercel.app/component/logoku.png",
         width: 800,
         height: 600,
-        alt: "balxzzy Logo",
+        alt: "sz Logo",
       },
     ],
   },
