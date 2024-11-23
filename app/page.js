@@ -1,17 +1,45 @@
-// app/page.js
 "use client"; // Menandai file ini sebagai komponen klien
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Link from "next/link";
 
 export default function Home() {
   const [showInfo, setShowInfo] = useState(false);
+  const [ip, setIp] = useState('');
+  const [time, setTime] = useState('');
+  const [batteryLevel, setBatteryLevel] = useState('');
 
   const handleBellClick = () => {
     setShowInfo(!showInfo);
   };
 
-return (
+  useEffect(() => {
+    // Fetch IP address
+    const fetchIp = async () => {
+      const response = await fetch("https://api.ipify.org?format=json");
+      const data = await response.json();
+      setIp(data.ip);
+    };
+
+    // Fetch battery level
+    const fetchBatteryLevel = async () => {
+      const battery = await navigator.getBattery();
+      setBatteryLevel(`${Math.floor(battery.level * 100)}%`);
+    };
+
+    // Update time every second
+    const intervalId = setInterval(() => {
+      const now = new Date();
+      setTime(now.toLocaleTimeString());
+    }, 1000);
+
+    fetchIp();
+    fetchBatteryLevel();
+
+    return () => clearInterval(intervalId); // Cleanup on component unmount
+  }, []);
+
+  return (
     <div style={styles.container}>
       <div style={styles.bellButton} onClick={handleBellClick}>
         <span style={styles.bellIcon}>🔔</span>
@@ -20,7 +48,7 @@ return (
       {showInfo && (
         <div style={styles.infoBox}>
           <p style={styles.infoText}>CHANGELOG : </p>
-          <p style={styles.infoText}>   23 - NOV - 2024 : WEB WAS CREATED</p>
+          <p style={styles.infoText}>23 - NOV - 2024 : WEB WAS CREATED</p>
         </div>
       )}
 
@@ -57,6 +85,13 @@ return (
         </p>
       </section>
 
+      <section style={styles.infoSection}>
+        <h2 style={styles.subHeading}>INFO</h2>
+        <p style={styles.infoText}>Waktu saat ini: {time}</p>
+        <p style={styles.infoText}>IP Anda: {ip}</p>
+        <p style={styles.infoText}>Tingkat Baterai: {batteryLevel}</p>
+      </section>
+
       <section style={styles.socialSection}>
         <h2 style={styles.subHeading}>Connect with Me</h2>
         <div style={styles.buttonContainer}>
@@ -76,6 +111,7 @@ const styles = {
   container: {
     maxWidth: "800px",
     margin: "0 auto",
+    padding: "
     padding: "20px",
     fontFamily: "Arial, sans-serif",
     position: "relative",
@@ -119,7 +155,7 @@ const styles = {
     fontSize: "18px",
     marginTop: "10px",
   },
-   link: {
+  link: {
     display: "inline-block",
     marginBottom: "30px",
     padding: "10px 20px",
@@ -156,6 +192,13 @@ const styles = {
   },
   bio: {
     fontSize: "16px",
+  },
+  infoSection: {
+    marginTop: "40px",
+    padding: "10px",
+    border: "1px solid #ccc",
+    borderRadius: "5px",
+    backgroundColor: "#f9f9f9",
   },
   socialSection: {
     marginTop: "40px",
