@@ -20,12 +20,13 @@ return (
 
       {showInfo && (
         <div style={styles.infoBox}>
-          <p style={styles.infoText}>Ini adalah informasi yang ditampilkan setelah tombol loncong ditekan!</p>
+          <p style={styles.infoText}>CHANGELOG :!</p>
+          <p style={styles.infoText}>- 23 - NOV - 2024 : WEB WAS CREATED</p>
         </div>
       )}
 
       <div style={styles.infoBar}>
-        <p style={styles.infoText}>W E L C O M E  D E V!</p>
+        <p style={styles.infoText}>W E L C O M E  -  D E V</p>
       </div>
 
       <h1 style={styles.heading}>Selamat Datang di Halaman Sederhana!</h1>
