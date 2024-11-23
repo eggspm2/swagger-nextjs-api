@@ -19,8 +19,8 @@ return (
 
       {showInfo && (
         <div style={styles.infoBox}>
-          <p style={styles.infoText}>CHANGELOG :!</p>
-          <p style={styles.infoText}>- 23 - NOV - 2024 : WEB WAS CREATED</p>
+          <p style={styles.infoText}>CHANGELOG : </p>
+          <p style={styles.infoText}>   23 - NOV - 2024 : WEB WAS CREATED</p>
         </div>
       )}
 
@@ -28,24 +28,24 @@ return (
         <p style={styles.infoText}>W E L C O M E  -  D E V</p>
       </div>
 
-      <h1 style={styles.heading}>Selamat Datang di Halaman Sederhana!</h1>
+      <h1 style={styles.heading}>HALAMAN UTAMA</h1>
       <p style={styles.description}>
-        Halaman ini memiliki tombol loncong di sudut kanan atas. Tekan tombol untuk melihat informasi.
+        thanks for using and support me , untuk ke area Docs tekan tombol dibawah..
       </p>
       <Link href="/docs" style={styles.link}>Docs Page!</Link>
 
       <section style={styles.faqSection}>
         <h2 style={styles.subHeading}>Frequently Asked Questions (FAQ)</h2>
         <div style={styles.faqItem}>
-          <h3 style={styles.question}>1. Apakah REST API ini berbayar?</h3>
-          <p style={styles.answer}>Tidak, karena kami membuat REST API gratis untuk mempermudah dalam pengembangan.</p>
+          <h3 style={styles.question}>1. Apakah ini berbayar?</h3>
+          <p style={styles.answer}>Tidak.</p>
         </div>
         <div style={styles.faqItem}>
           <h3 style={styles.question}>2. Cara pakai?</h3>
-          <p style={styles.answer}>Anda dapat menggunakan fitur REST API kami di bagian docs.</p>
+          <p style={styles.answer}>Anda dapat menggunakan fitur kami di bagian docs.</p>
         </div>
         <div style={styles.faqItem}>
-          <h3 style={styles.question}>3. Di mana tempat laporan bug/error?</h3>
+          <h3 style={styles.question}>3. Di mana tempat laporan bug / error?</h3>
           <p style={styles.answer}>Anda dapat menghubungi tim dukungan kami melalui halaman kontak.</p>
         </div>
       </section>
