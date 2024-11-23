@@ -61,7 +61,7 @@ export default function Home() {
         thanks for using and support me , untuk ke area Docs tekan tombol dibawah..
       </p>
       <Link href="/docs" style={styles.link}>Docs Page!</Link>
-      <Link href="/image" style={styles.link}>Image Generator!</Link>
+      <Link href="image.html" style={styles.link}>Image Generator!</Link>
 
       <section style={styles.faqSection}>
         <h2 style={styles.subHeading}>Frequently Asked Questions (FAQ)</h2>
