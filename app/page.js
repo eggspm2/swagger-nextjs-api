@@ -4,15 +4,18 @@ import { useState, useEffect } from 'react';
 import Link from "next/link";
 
 export default function Home() {
-  const [showInfo, setShowInfo] = useState(false);
   const [ip, setIp] = useState('');
   const [time, setTime] = useState('');
   const [date, setDate] = useState('');
   const [batteryLevel, setBatteryLevel] = useState('');
 
-  const handleBellClick = () => {
-    setShowInfo(!showInfo);
-  };
+  const [faqs, setFaqs] = useState([
+    { question: "Apa itu Acez API's?", answer: "Acez API's adalah platform untuk mengakses berbagai API." },
+    { question: "Bagaimana cara menggunakan?", answer: "Anda dapat menggunakan API dengan mengikuti dokumentasi yang tersedia." },
+    { question: "Apakah ini gratis?", answer: "Ya, sebagian besar layanan kami gratis untuk digunakan." },
+  ]);
+
+  const [expandedFaqIndex, setExpandedFaqIndex] = useState(null);
 
   useEffect(() => {
     // Fetch IP address
@@ -20,12 +23,6 @@ export default function Home() {
       const response = await fetch("https://api.ipify.org?format=json");
       const data = await response.json();
       setIp(data.ip);
-    };
-
-    // Fetch battery level
-    const fetchBatteryLevel = async () => {
-      const battery = await navigator.getBattery();
-      setBatteryLevel(`${Math.floor(battery.level * 100)}%`);
     };
 
     // Update time and date every second
@@ -36,66 +33,65 @@ export default function Home() {
     }, 1000);
 
     fetchIp();
-    fetchBatteryLevel();
 
     return () => clearInterval(intervalId); // Cleanup on component unmount
   }, []);
 
+  const toggleFaq = (index) => {
+    setExpandedFaqIndex(expandedFaqIndex === index ? null : index);
+  };
+
   return (
-    <div className="bg-gray-900 text-white font-sans min-h-screen p-4">
+    <div className="bg-gray-900 text-white font-sans min-h-screen p-6">
       <div className="container mx-auto">
-        <div className="flex justify-between items-center mb-4">
-          <h1 className="text-xl text-blue-400">Acez API's</h1>
-          <div className="relative" onClick={handleBellClick}>
-            <i className="fas fa-bell text-white text-xl"></i>
-            <span className="absolute top-0 right-0 bg-green-500 text-xs rounded-full px-1">3</span>
+        <h1 className="text-3xl font-bold text-blue-400 text-center mb-8">Acez API's</h1>
+
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
+          <div className="bg-gradient-to-r from-blue-500 to-blue-700 p-6 rounded-full shadow-lg transform transition-transform hover:scale-105">
+            <p className="text-sm">YOUR IP ADDRESS</p>
+            <p className="text-2xl">{ip || 'Loading...'}</p>
+          </div>
+          <div className="bg-gradient-to-r from-blue-500 to-blue-700 p-6 rounded-full shadow-lg transform transition-transform hover:scale-105">
+            <p className="text-sm">CLOCK</p>
+            <p className="text-2xl">{time}</p>
+          </div>
+          <div className="bg-gradient-to-r from-blue-500 to-blue-700 p-6 rounded-full shadow-lg transform transition-transform hover:scale-105">
+            <p className="text-sm">DATE</p>
+            <p className="text-2xl">{date}</p>
           </div>
         </div>
 
-        <div className="bg-gray-800 p-4 rounded-lg mb-4">
-          <p className="text-lg">Noted: Ini Hanya Contoh UI Fitur Di Website Ini Tidak Ada Yang Bekerja Ini Hanya UI Nya, Jika Ada Error Pada UI Ini Hubungi Saya Di WhatsApp.</p>
-        </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-4">
-          <div className="bg-gray-800 p-4 rounded-lg flex items-center justify-between">
-            <div>
-              <p className="text-sm">YOUR IP ADDRESS</p>
-              <p className="text-2xl">{ip || 'Loading...'}</p>
-            </div>
-            <i className="fas fa-map-marker-alt text-blue-400 text-2xl"></i>
-          </div>
-          <div className="bg-gray-800 p-4 rounded-lg flex items-center justify-between">
-            <div>
-              <p className="text-sm">CLOCK</p>
-              <p className="text-2xl">{time}</p>
-            </div>
-            <i className="fas fa-clock text-blue-400 text-2xl"></i>
-          </div>
-          <div className="bg-gray-800 p-4 rounded-lg flex items-center justify-between">
-            <div>
-              <p className="text-sm">DATE</p>
-              <p className="text-2xl">{date}</p>
-            </div>
-            <i className="fas fa-calendar-alt text-blue-400 text-2xl"></i>
-          </div>
-          <div className="bg-gray-800 p-4 rounded-lg flex items-center justify-between">
-            <div>
-              <p className="text-sm">YOUR BATTERY</p>
-              <p className="text-2xl">{batteryLevel || 'Loading...'}</p>
-            </div>
-            <i className="fas fa-battery-full text-blue-400 text-2xl"></i>
-          </div>
-        </div>
-
-        <div className="text-center mb-4">
+        <div className="text-center mb-6">
           <p className="mb-2">Someone want to donate me?</p>
           <Link href="https://trakteer.id" target="_blank">
-            <button className="bg-blue-500 text-white px-4 py-2 rounded-lg">Trakteer</button>
+            <button className="bg-blue-500 text-white px-6 py-3 rounded-lg shadow-lg transition-transform transform hover:scale-105">
+              Trakteer
+            </button>
           </Link>
         </div>
 
-        <div className="text-center">
-          <p className="text-sm">Made with <i className="fas fa-heart text-red-500"></i> by Acedt</p>
+        <div className="faq-section">
+          <h2 className="text-xl font-semibold text-blue-400 mb-4">Frequently Asked Questions</h2>
+          {faqs.map((faq, index) => (
+            <div key={index} className="mb-2">
+              <button
+                className="w-full text-left bg-gray-800 p-4 rounded-lg shadow-md transition-all duration-300"
+                onClick={() => toggleFaq(index)}
+              >
+                <p className="font-medium">{faq.question}</p>
+              </button>
+              {expandedFaqIndex === index && (
+                <div className="bg-gray-700 p-4 rounded-lg mt-2">
+                  <p>{faq.answer}</p>
+                </div>
+              )}
+            </div>
+          ))}
+        </div>
+
+        <div className="text-center mt-6">
+          <p className="text-sm">Made with <i className="fas fa-heart text-red-500"></p>         
+          </p>
         </div>
       </div>
     </div>
