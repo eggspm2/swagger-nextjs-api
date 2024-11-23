@@ -1,4 +1,5 @@
 // app/page.js
+"use client"; // Menandai file ini sebagai komponen klien
 
 import { useState } from 'react';
 import Link from "next/link";
