@@ -4,18 +4,14 @@ import { useState, useEffect } from 'react';
 import Link from "next/link";
 
 export default function Home() {
+  const [showInfo, setShowInfo] = useState(false);
   const [ip, setIp] = useState('');
   const [time, setTime] = useState('');
-  const [date, setDate] = useState('');
   const [batteryLevel, setBatteryLevel] = useState('');
 
-  const [faqs, setFaqs] = useState([
-    { question: "Apa itu Acez API's?", answer: "Acez API's adalah platform untuk mengakses berbagai API." },
-    { question: "Bagaimana cara menggunakan?", answer: "Anda dapat menggunakan API dengan mengikuti dokumentasi yang tersedia." },
-    { question: "Apakah ini gratis?", answer: "Ya, sebagian besar layanan kami gratis untuk digunakan." },
-  ]);
-
-  const [expandedFaqIndex, setExpandedFaqIndex] = useState(null);
+  const handleBellClick = () => {
+    setShowInfo(!showInfo);
+  };
 
   useEffect(() => {
     // Fetch IP address
@@ -25,75 +21,212 @@ export default function Home() {
       setIp(data.ip);
     };
 
-    // Update time and date every second
+    // Fetch battery level
+    const fetchBatteryLevel = async () => {
+      const battery = await navigator.getBattery();
+      setBatteryLevel(`${Math.floor(battery.level * 100)}%`);
+    };
+
+    // Update time every second
     const intervalId = setInterval(() => {
       const now = new Date();
       setTime(now.toLocaleTimeString());
-      setDate(now.toLocaleDateString());
     }, 1000);
 
     fetchIp();
+    fetchBatteryLevel();
 
     return () => clearInterval(intervalId); // Cleanup on component unmount
   }, []);
 
-  const toggleFaq = (index) => {
-    setExpandedFaqIndex(expandedFaqIndex === index ? null : index);
-  };
-
   return (
-    <div className="bg-gray-900 text-white font-sans min-h-screen p-6">
-      <div className="container mx-auto">
-        <h1 className="text-3xl font-bold text-blue-400 text-center mb-8">Acez API's</h1>
+    <div style={styles.container}>
+      <div style={styles.bellButton} onClick={handleBellClick}>
+        <span style={styles.bellIcon}>🔔</span>
+      </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
-          <div className="bg-gradient-to-r from-blue-500 to-blue-700 p-6 rounded-full shadow-lg transform transition-transform hover:scale-105">
-            <p className="text-sm">YOUR IP ADDRESS</p>
-            <p className="text-2xl">{ip || 'Loading...'}</p>
-          </div>
-          <div className="bg-gradient-to-r from-blue-500 to-blue-700 p-6 rounded-full shadow-lg transform transition-transform hover:scale-105">
-            <p className="text-sm">CLOCK</p>
-            <p className="text-2xl">{time}</p>
-          </div>
-          <div className="bg-gradient-to-r from-blue-500 to-blue-700 p-6 rounded-full shadow-lg transform transition-transform hover:scale-105">
-            <p className="text-sm">DATE</p>
-            <p className="text-2xl">{date}</p>
-          </div>
+      {showInfo && (
+        <div style={styles.infoBox}>
+          <p style={styles.infoText}>CHANGELOG : </p>
+          <p style={styles.infoText}>23 - NOV - 2024 : WEB WAS CREATED</p>
         </div>
+      )}
 
-        <div className="text-center mb-6">
-          <p className="mb-2">Someone want to donate me?</p>
-          <Link href="https://trakteer.id" target="_blank">
-            <button className="bg-blue-500 text-white px-6 py-3 rounded-lg shadow-lg transition-transform transform hover:scale-105">
-              Trakteer
-            </button>
+      <div style={styles.infoBar}>
+        <p style={styles.infoText}>W E L C O M E  -  D E V</p>
+      </div>
+
+      <h1 style={styles.heading}>HALAMAN UTAMA</h1>
+      <p style={styles.description}>
+        thanks for using and support me , untuk ke area Docs tekan tombol dibawah..
+      </p>
+      <Link href="/docs" style={styles.link}>Docs Page!</Link>
+      <Link href="/image" style={styles.link}>Image Generator!</Link>
+
+      <section style={styles.faqSection}>
+        <h2 style={styles.subHeading}>Frequently Asked Questions (FAQ)</h2>
+        <div style={styles.faqItem}>
+          <h3 style={styles.question}>1. Apakah ini berbayar?</h3>
+          <p style={styles.answer}>Tidak.</p>
+        </div>
+        <div style={styles.faqItem}>
+          <h3 style={styles.question}>2. Cara pakai?</h3>
+          <p style={styles.answer}>Anda dapat menggunakan fitur kami di bagian docs.</p>
+        </div>
+        <div style={styles.faqItem}>
+          <h3 style={styles.question}>3. Di mana tempat laporan bug / error?</h3>
+          <p style={styles.answer}>Anda dapat menghubungi tim dukungan kami melalui halaman kontak.</p>
+        </div>
+      </section>
+
+      <section style={styles.bioSection}>
+        <h2 style={styles.subHeading}>ABOUT ME</h2>
+        <p style={styles.bio}>
+          Saya hanya seorang pengembang pemula, jadi jangan dibully.
+        </p>
+      </section>
+
+      <section style={styles.infoSection}>
+        <h2 style={styles.subHeading}>INFO</h2>
+        <p style={styles.infoText}>Waktu saat ini: {time}</p>
+        <p style={styles.infoText}>IP Anda: {ip}</p>
+        <p style={styles.infoText}>Tingkat Baterai: {batteryLevel}</p>
+      </section>
+
+      <section style={styles.socialSection}>
+        <h2 style={styles.subHeading}>Connect with Me</h2>
+        <div style={styles.buttonContainer}>
+          <Link href="https://github.com/eggspm2" target="_blank" style={styles.socialButton}>
+            GitHub
+          </Link>
+          <Link href="https://youtube.com/@sanzmd" target="_blank" style={styles.socialButton}>
+            YouTube
           </Link>
         </div>
-
-        <div className="faq-section">
-          <h2 className="text-xl font-semibold text-blue-400 mb-4">Frequently Asked Questions</h2>
-          {faqs.map((faq, index) => (
-            <div key={index} className="mb-2">
-              <button
-                className="w-full text-left bg-gray-800 p-4 rounded-lg shadow-md transition-all duration-300"
-                onClick={() => toggleFaq(index)}
-              >
-                <p className="font-medium">{faq.question}</p>
-              </button>
-              {expandedFaqIndex === index && (
-                <div className="bg-gray-700 p-4 rounded-lg mt-2">
-                  <p>{faq.answer}</p>
-                </div>
-              )}
-            </div>
-          ))}
-        </div>
-
-        <div className="text-center mt-6">
-          <p className="text-sm">Made with <i className="fas fa-heart text-red-500"></i        
-          </p>
-        </div>
-      </div>
+      </section>
     </div>
   );
 }
+
+const styles = {
+  container: {
+    maxWidth: "800px",
+    margin: "0 auto",
+    padding: "
+    padding: "20px",
+    fontFamily: "Arial, sans-serif",
+    position: "relative",
+    backgroundColor: "#ffffff",
+  },
+  bellButton: {
+    position: "absolute",
+    top: "20px",
+    right: "20px",
+    cursor: "pointer",
+    backgroundColor: "#4A90E2",
+    borderRadius: "50%",
+    padding: "10px",
+    boxShadow: "0 2px 5px rgba(0, 0, 0, 0.2)",
+  },
+  bellIcon: {
+    color: "#ffffff",
+    fontSize: "24px",
+  },
+  infoBox: {
+    marginTop: "20px",
+    padding: "15px",
+    border: "1px solid #ccc",
+    borderRadius: "5px",
+    backgroundColor: "#f9f9f9",
+  },
+  infoText: {
+    margin: 0,
+  },
+  infoBar: {
+    backgroundColor: "#4A90E2",
+    color: "#ffffff",
+    padding: "10px",
+    textAlign: "center",
+    marginBottom: "20px",
+  },
+  heading: {
+    color: "#4A90E2",
+  },
+  description: {
+    fontSize: "18px",
+    marginTop: "10px",
+  },
+  link: {
+    display: "inline-block",
+    marginBottom: "30px",
+    padding: "10px 20px",
+    backgroundColor: "#4A90E2",
+    color: "#fff",
+    textDecoration: "none",
+    borderRadius: "5px",
+  },
+  faqSection: {
+    marginTop: "40px",
+    padding: "10px",
+    border: "1px solid #ccc",
+    borderRadius: "5px",
+    backgroundColor: "#f9f9f9",
+  },
+  faqItem: {
+    marginBottom: "15px",
+  },
+  question: {
+    fontWeight: "bold",
+  },
+  answer: {
+    marginLeft: "10px",
+  },
+  bioSection: {
+    marginTop: "40px",
+    padding: "10px",
+    border: "1px solid #ccc",
+    borderRadius: "5px",
+    backgroundColor: "#f9f9f9",
+  },
+  subHeading: {
+    color: "#4A90E2",
+  },
+  bio: {
+    fontSize: "16px",
+  },
+  infoSection: {
+    marginTop: "40px",
+    padding: "10px",
+    border: "1px solid #ccc",
+    borderRadius: "5px",
+    backgroundColor: "#f9f9f9",
+  },
+  socialSection: {
+    marginTop: "40px",
+    textAlign: "center",
+  },
+  buttonContainer: {
+    display: "flex",
+    justifyContent: "center",
+    gap: "20px",
+    marginTop: "10px",
+  },
+  socialButton: {
+    display: "flex",
+    alignItems: "center",
+    padding: "10px 15px",
+    backgroundColor: "#4A90E2",
+    color: "#ffffff",
+    textDecoration: "none",
+    borderRadius: "5px",
+    transition: "background-color 0.3s",
+  },
+};
+
+// Tambahkan efek hover untuk tombol sosial
+const socialButtonHover = {
+  ...styles.socialButton,
+  ':hover': {
+    backgroundColor: '#005bb5', // Warna saat hover
+  },
+};
