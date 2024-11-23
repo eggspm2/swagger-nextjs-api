@@ -37,7 +37,7 @@ async function igStalk(username) {
 
     return {
       status: true,
-      creator: "IFTXH || supported by s.e.k.s",
+      creator: "S A N Z",
       result: {
         username: user.username,
         fullName: user.full_name,
@@ -57,7 +57,7 @@ async function igStalk(username) {
   } catch (error) {
     return {
       status: false,
-      creator: "IFTXH || supported by s.e.k.s",
+      creator: "S A N Z",
       message: "Username not found.",
     }
   }
