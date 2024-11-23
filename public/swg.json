@@ -2,18 +2,18 @@
   "openapi": "3.0.0",
   "info": {
     "version": "nextjs",
-    "title": "Shiina-Api's",
-    "description": "Hello World",
+    "title": "SANZ-MD",
+    "description": "S I M P L E - R E S T - A P I",
     "contact": {
       "name": "Source Code",
-      "url": "https://github.com/balxz/swagger-nextjs"
+      "url": "https://www.youtube.com/@sanzmd"
     }
   },
   "paths": {
     "/api/openai/gpt4-pro": {
       "get": {
         "summary": "",
-        "description": "Gpt 4o Pro",
+        "description": "CHAT GPT 4O",
         "tags": [
           "Openai"
         ],
@@ -111,7 +111,7 @@
             "required": false,
             "schema": {
               "type": "string",
-              "example": "iqstore78"
+              "example": "msbrewc"
             }
           }
         ],
@@ -205,7 +205,7 @@
                   "username": {
                     "type": "string",
                     "description": "Try Input Username Instagram",
-                    "example": "iqstore78"
+                    "example": "msbrewc"
                   }
                 },
                 "required": ["username"]
