@@ -40,15 +40,25 @@ export default function Home() {
         </p>
       </section>
 
-      <section style={styles.socialSection}>
+     <section style={styles.socialSection}>
         <h2 style={styles.subHeading}>Connect with Me</h2>
         <div style={styles.buttonContainer}>
           <Link href="https://github.com/yourusername" target="_blank" style={styles.socialButton}>
-            <Image src="/path/to/github-logo.png" alt="GitHub" width={30} height={30} />
+            <Image 
+              src="https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png" 
+              alt="GitHub" 
+              width={30} 
+              height={30} 
+            />
             GitHub
           </Link>
           <Link href="https://youtube.com/yourchannel" target="_blank" style={styles.socialButton}>
-            <Image src="/path/to/youtube-logo.png" alt="YouTube" width={30} height={30} />
+            <Image 
+              src="https://upload.wikimedia.org/wikipedia/commons/4/42/YouTube_icon_%282013-2017%29.png" 
+              alt="YouTube" 
+              width={30} 
+              height={30} 
+            />
             YouTube
           </Link>
         </div>
@@ -116,3 +126,32 @@ const styles = {
   },
   subHeading: {
     color: "#4A90
+    E2",
+  },
+  bio: {
+    fontSize: "16px",
+  },
+  socialSection: {
+    marginTop: "40px",
+    textAlign: "center",
+  },
+  buttonContainer: {
+    display: "flex",
+    justifyContent: "center",
+    gap: "20px",
+    marginTop: "10px",
+  },
+  socialButton: {
+    display: "flex",
+    alignItems: "center",
+    padding: "10px 15px",
+    backgroundColor: "#4A90E2",
+    color: "#ffffff",
+    textDecoration: "none",
+    borderRadius: "5px",
+    transition: "background-color 0.3s",
+  },
+};
+
+// Pastikan Anda mengganti "/path/to/github-logo.png" dan "/path/to/youtube-logo.png"
+// dengan jalur yang benar ke gambar logo GitHub dan YouTube Anda.
