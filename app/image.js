@@ -1,39 +1,40 @@
 // app/image.js
 import { useState } from 'react';
 
-export default function image() {
+export default function ImageGenerator() {
   const [prompt, setPrompt] = useState('');
   const [height, setHeight] = useState('');
   const [width, setWidth] = useState('');
   const [imageUrl, setImageUrl] = useState('');
   const [loading, setLoading] = useState(false);
-  const [showGeneratedText, setShowGeneratedText] = useState(false);
-  const [showDownloadButton, setShowDownloadButton] = useState(false);
+  const [error, setError] = useState('');
 
-  const handleGenerate = () => {
+  const handleGenerate = async () => {
     const description = prompt ? encodeURIComponent(prompt) : 'beautiful%20landscape';
     const randomSeed = Math.floor(Math.random() * 1000000000);
     const heightA = height ? parseInt(height) : 360;
     const widthA = width ? parseInt(width) : 480;
 
     setLoading(true);
-    setShowGeneratedText(false);
-    setShowDownloadButton(false);
+    setError('');
 
-    const imageUrl = `https://image.pollinations.ai/prompt/${description}?nologo=1&seed=${randomSeed}&height=${heightA}&width=${widthA}`;
-    
-    const image = new Image();
-    image.src = imageUrl;
-    image.onload = () => {
+    try {
+      const response = await fetch(`https://image.pollinations.ai/prompt/${description}?nologo=1&seed=${randomSeed}&height=${heightA}&width=${widthA}`);
+      if (!response.ok) throw new Error('Failed to generate image');
+
+      const image = new Image();
+      image.src = response.url; // Assuming the API returns the image URL
+      image.onload = () => {
+        setLoading(false);
+        setImageUrl(image.src);
+      };
+      image.onerror = () => {
+        throw new Error('Image failed to load');
+      };
+    } catch (err) {
       setLoading(false);
-      setImageUrl(imageUrl);
-      setShowGeneratedText(true);
-      setShowDownloadButton(true);
-    };
-    image.onerror = () => {
-      setLoading(false);
-      alert('Failed to load image. Please try again.');
-    };
+      setError(err.message);
+    }
   };
 
   return (
@@ -71,8 +72,19 @@ export default function image() {
           Generate Image
         </button>
       </div>
-      <div className="output" style={{ textAlign: 'center', marginTop: '1rem' }}>
-        {showGeneratedText && <h2>Generated Image:</h2>}
-        {loading && <div className="loader" style={{ border: '6px solid black', borderTop: '6px solid white', borderRadius: '50%', width: '50px', height: '50px', animation: 'spin 1s linear infinite', margin: '0 auto' }}></div>}
-        {imageUrl && <div id="image-container"><img src={imageUrl} alt="Generated" style={{ maxWidth: '100%', height: 'auto', marginTop: '1rem', borderRadius: '20px' }} /></div>}
-        {showDownloadButton && <a href={imageUrl} id="dlButton" style
+      {loading && <div className="loader" style={{ margin: '1rem auto', border: '6px solid black', borderTop: '6px solid white', borderRadius: '50%', width: '50px', height: '50px', animation: 'spin 1s linear infinite' }}></div>}
+      {error && <p style={{ color: 'red', textAlign: 'center' }}>{error}</p>}
+      {imageUrl && <img src={imageUrl} alt="Generated" style      {imageUrl && (
+        <div style={{ textAlign: 'center', marginTop: '1rem' }}>
+          <h2>Generated Image:</h2>
+          <img src={imageUrl} alt="Generated" style={{ maxWidth: '100%', height: 'auto', borderRadius: '20px' }} />
+          <div style={{ marginTop: '10px' }}>
+            <a href={imageUrl} download style={{ backgroundColor: '#4CAF50', color: 'white', padding: '0.5rem 1rem', borderRadius: '8px', textDecoration: 'none' }}>
+              Download Image
+            </a>
+          </div>
+        </div>
+      )}
+    </main>
+  );
+        }
