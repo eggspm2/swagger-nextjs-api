@@ -1,41 +1,57 @@
 // app/page.js
-// https://nextjs.org/docs/app/getting-started/installation
 
 import Link from "next/link";
+import Image from "next/image"; // Import Image untuk gambar logo
 
 export default function Home() {
   return (
     <div style={styles.container}>
+      <div style={styles.infoBar}>
+        <p style={styles.infoText}>Informasi: Selamat datang di API kami yang gratis!</p>
+      </div>
+
       <h1 style={styles.heading}>Hellooo, Welcome!!!</h1>
       <p style={styles.description}>
         Selamat datang di halaman utama kami! Kami senang Anda di sini. 
-        Jelajahi lebih lanjut tentang proyek kami dan jangan ragu untuk 
-        menghubungi kami jika ada pertanyaan.
+        Jelajahi lebih lanjut web API kami.
       </p>
-      <Link href="/docs" style={styles.link}>Try Ke Docs Page!</Link>
+      <Link href="/docs" style={styles.link}>Docs Page!</Link>
 
       <section style={styles.faqSection}>
         <h2 style={styles.subHeading}>Frequently Asked Questions (FAQ)</h2>
         <div style={styles.faqItem}>
-          <h3 style={styles.question}>1. Apa itu proyek ini?</h3>
-          <p style={styles.answer}>Proyek ini adalah platform yang menyediakan dokumentasi dan tutorial untuk membantu pengembang.</p>
+          <h3 style={styles.question}>1. Apakah REST API ini berbayar?</h3>
+          <p style={styles.answer}>Tidak, karena kami membuat REST API gratis untuk mempermudah dalam pengembangan.</p>
         </div>
         <div style={styles.faqItem}>
-          <h3 style={styles.question}>2. Bagaimana cara menggunakan platform ini?</h3>
-          <p style={styles.answer}>Anda dapat mulai dengan mengunjungi halaman dokumentasi dan mengikuti panduan yang tersedia.</p>
+          <h3 style={styles.question}>2. Cara pakai?</h3>
+          <p style={styles.answer}>Anda dapat menggunakan fitur REST API kami di bagian docs.</p>
         </div>
         <div style={styles.faqItem}>
-          <h3 style={styles.question}>3. Di mana saya bisa mendapatkan bantuan lebih lanjut?</h3>
+          <h3 style={styles.question}>3. Di mana tempat laporan bug/error?</h3>
           <p style={styles.answer}>Anda dapat menghubungi tim dukungan kami melalui halaman kontak.</p>
         </div>
       </section>
 
       <section style={styles.bioSection}>
-        <h2 style={styles.subHeading}>Tentang Developer</h2>
+        <h2 style={styles.subHeading}>ABOUT ME</h2>
         <p style={styles.bio}>
-          Saya adalah seorang pengembang web dengan pengalaman dalam membangun aplikasi yang responsif dan intuitif. 
-          Saya selalu berusaha untuk belajar dan berbagi pengetahuan dengan orang lain.
+          Saya hanya seorang pengembang pemula, jadi jangan dibully :<
         </p>
+      </section>
+
+      <section style={styles.socialSection}>
+        <h2 style={styles.subHeading}>Connect with Me</h2>
+        <div style={styles.buttonContainer}>
+          <Link href="https://github.com/yourusername" target="_blank" style={styles.socialButton}>
+            <Image src="/path/to/github-logo.png" alt="GitHub" width={30} height={30} />
+            GitHub
+          </Link>
+          <Link href="https://youtube.com/yourchannel" target="_blank" style={styles.socialButton}>
+            <Image src="/path/to/youtube-logo.png" alt="YouTube" width={30} height={30} />
+            YouTube
+          </Link>
+        </div>
       </section>
     </div>
   );
@@ -47,6 +63,17 @@ const styles = {
     margin: "0 auto",
     padding: "20px",
     fontFamily: "Arial, sans-serif",
+    backgroundColor: "#ffffff",
+  },
+  infoBar: {
+    backgroundColor: "#4A90E2",
+    color: "#ffffff",
+    padding: "10px",
+    textAlign: "center",
+    marginBottom: "20px",
+  },
+  infoText: {
+    margin: 0,
   },
   heading: {
     color: "#4A90E2",
@@ -88,9 +115,4 @@ const styles = {
     backgroundColor: "#f9f9f9",
   },
   subHeading: {
-    color: "#4A90E2",
-  },
-  bio: {
-    fontSize: "16px",
-  },
-};
+    color: "#4A90
