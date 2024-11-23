@@ -36,7 +36,7 @@ export default function Home() {
       <section style={styles.bioSection}>
         <h2 style={styles.subHeading}>ABOUT ME</h2>
         <p style={styles.bio}>
-          Saya hanya seorang pengembang pemula, jadi jangan dibully :<
+          Saya hanya seorang pengembang pemula, jadi jangan dibully
         </p>
       </section>
 
