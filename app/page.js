@@ -1,17 +1,36 @@
 // app/page.js
 
+import { useState } from 'react';
 import Link from "next/link";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faBell } from '@fortawesome/free-solid-svg-icons';
 
 export default function Home() {
+  const [showInfo, setShowInfo] = useState(false);
+
+  const handleBellClick = () => {
+    setShowInfo(!showInfo);
+  };
+
   return (
     <div style={styles.container}>
+      <div style={styles.bellButton} onClick={handleBellClick}>
+        <FontAwesomeIcon icon={faBell} style={styles.bellIcon} />
+      </div>
+
+      {showInfo && (
+        <div style={styles.infoBox}>
+          <p style={styles.infoText}>Ini adalah informasi yang ditampilkan setelah tombol loncong ditekan!</p>
+        </div>
+      )}
+
       <div style={styles.infoBar}>
         <p style={styles.infoText}>W E L C O M E  D E V!</p>
       </div>
 
+      <h1 style={styles.heading}>Selamat Datang di Halaman Sederhana!</h1>
       <p style={styles.description}>
-        Selamat datang di halaman utama kami! Kami senang Anda di sini. 
-        Jelajahi lebih lanjut web API kami.
+        Halaman ini memiliki tombol loncong di sudut kanan atas. Tekan tombol untuk melihat informasi.
       </p>
       <Link href="/docs" style={styles.link}>Docs Page!</Link>
 
@@ -34,21 +53,24 @@ export default function Home() {
       <section style={styles.bioSection}>
         <h2 style={styles.subHeading}>ABOUT ME</h2>
         <p style={styles.bio}>
-          Saya hanya seorang pengembang pemula, jadi jangan dibully
+          Saya hanya seorang pengembang pemula, jadi jangan dibully.
         </p>
       </section>
 
-<section style={styles.socialSection}>
-  <h2 style={styles.subHeading}>Connect with Me</h2>
-  <div style={styles.buttonContainer}>
-    <Link href="https://github.com/eggspm2" target="_blank" style={styles.socialButton}>
-      GitHub
-    </Link>
-    <Link href="https://youtube.com/@sanzmd" target="_blank" style={styles.socialButton}>
-      YouTube
-    </Link>
-  </div>
-</section>
+      <section style={styles.socialSection}>
+        <h2 style={styles.subHeading}>Connect with Me</h2>
+        <div style={styles.buttonContainer}>
+          <Link href="https://github.com/eggspm2" target="_blank" style={styles.socialButton}>
+            GitHub
+          </Link>
+          <Link href="https://youtube.com/@sanzmd" target="_blank" style={styles.socialButton}>
+            YouTube
+          </Link>
+        </div>
+      </section>
+    </div>
+  );
+}
 
 const styles = {
   container: {
@@ -56,7 +78,32 @@ const styles = {
     margin: "0 auto",
     padding: "20px",
     fontFamily: "Arial, sans-serif",
+    position: "relative",
     backgroundColor: "#ffffff",
+  },
+  bellButton: {
+    position: "absolute",
+    top: "20px",
+    right: "20px",
+    cursor: "pointer",
+    backgroundColor: "#4A90E2",
+    borderRadius: "50%",
+    padding: "10px",
+    boxShadow: "0 2px 5px rgba(0, 0, 0, 0.2)",
+  },
+  bellIcon: {
+    color: "#ffffff",
+    fontSize: "24px",
+  },
+  infoBox: {
+    marginTop: "20px",
+    padding: "15px",
+    border: "1px solid #ccc",
+    borderRadius: "5px",
+    backgroundColor: "#f9f9f9",
+  },
+  infoText: {
+    margin: 0,
   },
   infoBar: {
     backgroundColor: "#4A90E2",
@@ -65,17 +112,14 @@ const styles = {
     textAlign: "center",
     marginBottom: "20px",
   },
-  infoText: {
-    margin: 0,
-  },
   heading: {
     color: "#4A90E2",
   },
   description: {
     fontSize: "18px",
-    marginBottom: "20px",
+    marginTop: "10px",
   },
-  link: {
+   link: {
     display: "inline-block",
     marginBottom: "30px",
     padding: "10px 20px",
@@ -135,5 +179,10 @@ const styles = {
   },
 };
 
-// Pastikan Anda mengganti "/path/to/github-logo.png" dan "/path/to/youtube-logo.png"
-// dengan jalur yang benar ke gambar logo GitHub dan YouTube Anda.
+// Tambahkan efek hover untuk tombol sosial
+const socialButtonHover = {
+  ...styles.socialButton,
+  ':hover': {
+    backgroundColor: '#005bb5', // Warna saat hover
+  },
+};
