@@ -3,7 +3,6 @@
 
 import { useState } from 'react';
 import Link from "next/link";
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBell } from '@fortawesome/free-solid-svg-icons';
 
 export default function Home() {
@@ -13,10 +12,10 @@ export default function Home() {
     setShowInfo(!showInfo);
   };
 
-  return (
+return (
     <div style={styles.container}>
       <div style={styles.bellButton} onClick={handleBellClick}>
-        <FontAwesomeIcon icon={faBell} style={styles.bellIcon} />
+        <span style={styles.bellIcon}>🔔</span>
       </div>
 
       {showInfo && (
