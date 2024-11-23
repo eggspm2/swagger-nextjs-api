@@ -40,191 +40,81 @@ export default function Home() {
   }, []);
 
   return (
-    <div style={styles.container}>
-      <div style={styles.bellButton} onClick={handleBellClick}>
-        <span style={styles.bellIcon}>🔔</span>
-      </div>
-
-      {showInfo && (
-        <div style={styles.infoBox}>
-          <p style={styles.infoText}>CHANGELOG : </p>
-          <p style={styles.infoText}>23 - NOV - 2024 : WEB WAS CREATED</p>
+    <div className="bg-gray-900 text-white font-sans min-h-screen p-4">
+      <div className="container mx-auto">
+        <div className="flex justify-between items-center mb-4">
+          <h1 className="text-xl text-blue-400">My Dashboard</h1>
+          <div className="relative cursor-pointer" onClick={handleBellClick}>
+            <i className="fas fa-bell text-white text-xl"></i>
+            <span className="absolute top-0 right-0 bg-green-500 text-xs rounded-full px-1">3</span>
+          </div>
         </div>
-      )}
 
-      <div style={styles.infoBar}>
-        <p style={styles.infoText}>W E L C O M E  -  D E V</p>
-      </div>
+        {showInfo && (
+          <div className="bg-gray-800 p-4 rounded-lg mb-4">
+            <p className="text-lg">CHANGELOG:</p>
+            <p>23 - NOV - 2024 : WEB WAS CREATED</p>
+          </div>
+        )}
 
-      <h1 style={styles.heading}>HALAMAN UTAMA</h1>
-      <p style={styles.description}>
-        thanks for using and support me , untuk ke area Docs tekan tombol dibawah..
-      </p>
-      <Link href="/docs" style={styles.link}>Docs Page!</Link>
-
-      <section style={styles.faqSection}>
-        <h2 style={styles.subHeading}>Frequently Asked Questions (FAQ)</h2>
-        <div style={styles.faqItem}>
-          <h3 style={styles.question}>1. Apakah ini berbayar?</h3>
-          <p style={styles.answer}>Tidak.</p>
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-4">
+          <div className="bg-gray-800 p-4 rounded-lg flex items-center justify-between">
+            <div>
+              <p className="text-sm">YOUR IP ADDRESS</p>
+              <p className="text-2xl">{ip || 'Loading...'}</p>
+            </div>
+            <i className="fas fa-map-marker-alt text-blue-400 text-2xl"></i>
+          </div>
+          <div className="bg-gray-800 p-4 rounded-lg flex items-center justify-between">
+            <div>
+              <p className="text-sm">CLOCK</p>
+              <p className="text-2xl">{time}</p>
+            </div>
+            <i className="fas fa-clock text-blue-400 text-2xl"></i>
+          </div>
+          <div className="bg-gray-800 p-4 rounded-lg flex items-center justify-between">
+            <div>
+              <p className="text-sm">YOUR BATTERY</p>
+              <p className="text-2xl">{batteryLevel || 'Loading...'}</p>
+            </div>
+            <i className="fas fa-battery-full text-blue-400 text-2xl"></i>
+          </div>
         </div>
-        <div style={styles.faqItem}>
-          <h3 style={styles.question}>2. Cara pakai?</h3>
-          <p style={styles.answer}>Anda dapat menggunakan fitur kami di bagian docs.</p>
-        </div>
-        <div style={styles.faqItem}>
-          <h3 style={styles.question}>3. Di mana tempat laporan bug / error?</h3>
-          <p style={styles.answer}>Anda dapat menghubungi tim dukungan kami melalui halaman kontak.</p>
-        </div>
-      </section>
 
-      <section style={styles.bioSection}>
-        <h2 style={styles.subHeading}>ABOUT ME</h2>
-        <p style={styles.bio}>
-          Saya hanya seorang pengembang pemula, jadi jangan dibully.
-        </p>
-      </section>
+        <section className="bg-gray-800 p-4 rounded-lg mb-4">
+          <h2 className="text-lg">Frequently Asked Questions (FAQ)</h2>
+          <div className="mt-2">
+            <div className="mb-2">
+              <h3 className="font-bold">1. Apakah ini berbayar?</h3>
+              <p>Tidak.</p>
+            </div>
+            <div className="mb-2">
+              <h3 className="font-bold">2. Cara pakai?</h3>
+              <p>Anda dapat menggunakan fitur kami di bagian docs.</p>
+            </div>
+            <div className="mb-2">
+              <h3 className="font-bold">3. Di mana tempat laporan bug / error?</h3>
+              <p>              Anda dapat menghubungi tim dukungan kami melalui halaman kontak.</p>
+            </div>
+          </div>
+        </section>
 
-      <section style={styles.infoSection}>
-        <h2 style={styles.subHeading}>INFO</h2>
-        <p style={styles.infoText}>Waktu saat ini: {time}</p>
-        <p style={styles.infoText}>IP Anda: {ip}</p>
-        <p style={styles.infoText}>Tingkat Baterai: {batteryLevel}</p>
-      </section>
+        <section className="bg-gray-800 p-4 rounded-lg mb-4">
+          <h2 className="text-lg">ABOUT ME</h2>
+          <p>Saya hanya seorang pengembang pemula, jadi jangan dibully.</p>
+        </section>
 
-      <section style={styles.socialSection}>
-        <h2 style={styles.subHeading}>Connect with Me</h2>
-        <div style={styles.buttonContainer}>
-          <Link href="https://github.com/eggspm2" target="_blank" style={styles.socialButton}>
-            GitHub
+        <div className="text-center mb-4">
+          <p className="mb-2">Someone want to donate me?</p>
+          <Link href="https://trakteer.id" target="_blank">
+            <button className="bg-blue-500 text-white px-4 py-2 rounded-lg">Trakteer</button>
           </Link>
-          <Link href="https://youtube.com/@sanzmd" target="_blank" style={styles.socialButton}>
-            YouTube
-          </Link>
         </div>
-      </section>
+
+        <div className="text-center">
+          <p className="text-sm">Made with <i className="fas fa-heart text-red-500"></i> by Sanz</p>
+        </div>
+      </div>
     </div>
   );
 }
-
-const styles = {
-  container: {
-    maxWidth: "800px",
-    margin: "0 auto",
-    padding: "20px",
-    fontFamily: "Arial, sans-serif",
-    position: "relative",
-    backgroundColor: "#ffffff",
-  },
-  bellButton: {
-    position: "absolute",
-    top: "20px",
-    right: "20px",
-    cursor: "pointer",
-    backgroundColor: "#4A90E2",
-    borderRadius: "50%",
-    padding: "10px",
-    boxShadow: "0 2px 5px rgba(0, 0, 0, 0.2)",
-  },
-  bellIcon: {
-    color: "#ffffff",
-    fontSize: "24px",
-  },
-  infoBox: {
-    marginTop: "20px",
-    padding: "15px",
-    border: "1px solid #ccc",
-    borderRadius: "5px",
-    backgroundColor: "#f9f9f9",
-  },
-  infoText: {
-    margin: 0,
-  },
-  infoBar: {
-    backgroundColor: "#4A90E2",
-    color: "#ffffff",
-    padding: "10px",
-    textAlign: "center",
-    marginBottom: "20px",
-  },
-  heading: {
-    color: "#4A90E2",
-  },
-  description: {
-    fontSize: "18px",
-    marginTop: "10px",
-  },
-  link: {
-    display: "inline-block",
-    marginBottom: "30px",
-    padding: "10px 20px",
-    backgroundColor: "#4A90E2",
-    color: "#fff",
-    textDecoration: "none",
-    borderRadius: "5px",
-  },
-  faqSection: {
-    marginTop: "40px",
-    padding: "10px",
-    border: "1px solid #ccc",
-    borderRadius: "5px",
-    backgroundColor: "#f9f9f9",
-  },
-  faqItem: {
-    marginBottom: "15px",
-  },
-  question: {
-    fontWeight: "bold",
-  },
-  answer: {
-    marginLeft: "10px",
-  },
-  bioSection: {
-    marginTop: "40px",
-    padding: "10px",
-    border: "1px solid #ccc",
-    borderRadius: "5px",
-    backgroundColor: "#f9f9f9",
-  },
-  subHeading: {
-    color: "#4A90E2",
-  },
-  bio: {
-    fontSize: "16px",
-  },
-  infoSection: {
-    marginTop: "40px",
-    padding: "10px",
-    border: "1px solid #ccc",
-    borderRadius: "5px",
-    backgroundColor: "#f9f9f9",
-  },
-  socialSection: {
-    marginTop: "40px",
-    textAlign: "center",
-  },
-  buttonContainer: {
-    display: "flex",
-    justifyContent: "center",
-    gap: "20px",
-    marginTop: "10px",
-  },
-  socialButton: {
-    display: "flex",
-    alignItems: "center",
-    padding: "10px 15px",
-    backgroundColor: "#4A90E2",
-    color: "#ffffff",
-    textDecoration: "none",
-    borderRadius: "5px",
-    transition: "background-color 0.3s",
-  },
-};
-
-// Tambahkan efek hover untuk tombol sosial
-const socialButtonHover = {
-  ...styles.socialButton,
-  ':hover': {
-    backgroundColor: '#005bb5', // Warna saat hover
-  },
-};
