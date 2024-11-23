@@ -125,8 +125,7 @@ const styles = {
     backgroundColor: "#f9f9f9",
   },
   subHeading: {
-    color: "#4A90
-    E2",
+    color: "#4A90E2",
   },
   bio: {
     fontSize: "16px",
