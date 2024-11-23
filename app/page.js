@@ -3,7 +3,6 @@
 
 import { useState } from 'react';
 import Link from "next/link";
-import { faBell } from '@fortawesome/free-solid-svg-icons';
 
 export default function Home() {
   const [showInfo, setShowInfo] = useState(false);
