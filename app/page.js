@@ -7,6 +7,7 @@ export default function Home() {
   const [showInfo, setShowInfo] = useState(false);
   const [ip, setIp] = useState('');
   const [time, setTime] = useState('');
+  const [date, setDate] = useState('');
   const [batteryLevel, setBatteryLevel] = useState('');
 
   const handleBellClick = () => {
@@ -27,10 +28,11 @@ export default function Home() {
       setBatteryLevel(`${Math.floor(battery.level * 100)}%`);
     };
 
-    // Update time every second
+    // Update time and date every second
     const intervalId = setInterval(() => {
       const now = new Date();
       setTime(now.toLocaleTimeString());
+      setDate(now.toLocaleDateString());
     }, 1000);
 
     fetchIp();
@@ -43,19 +45,16 @@ export default function Home() {
     <div className="bg-gray-900 text-white font-sans min-h-screen p-4">
       <div className="container mx-auto">
         <div className="flex justify-between items-center mb-4">
-          <h1 className="text-xl text-blue-400">My Dashboard</h1>
-          <div className="relative cursor-pointer" onClick={handleBellClick}>
+          <h1 className="text-xl text-blue-400">Acez API's</h1>
+          <div className="relative" onClick={handleBellClick}>
             <i className="fas fa-bell text-white text-xl"></i>
             <span className="absolute top-0 right-0 bg-green-500 text-xs rounded-full px-1">3</span>
           </div>
         </div>
 
-        {showInfo && (
-          <div className="bg-gray-800 p-4 rounded-lg mb-4">
-            <p className="text-lg">CHANGELOG:</p>
-            <p>23 - NOV - 2024 : WEB WAS CREATED</p>
-          </div>
-        )}
+        <div className="bg-gray-800 p-4 rounded-lg mb-4">
+          <p className="text-lg">Noted: Ini Hanya Contoh UI Fitur Di Website Ini Tidak Ada Yang Bekerja Ini Hanya UI Nya, Jika Ada Error Pada UI Ini Hubungi Saya Di WhatsApp.</p>
+        </div>
 
         <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-4">
           <div className="bg-gray-800 p-4 rounded-lg flex items-center justify-between">
@@ -74,35 +73,19 @@ export default function Home() {
           </div>
           <div className="bg-gray-800 p-4 rounded-lg flex items-center justify-between">
             <div>
+              <p className="text-sm">DATE</p>
+              <p className="text-2xl">{date}</p>
+            </div>
+            <i className="fas fa-calendar-alt text-blue-400 text-2xl"></i>
+          </div>
+          <div className="bg-gray-800 p-4 rounded-lg flex items-center justify-between">
+            <div>
               <p className="text-sm">YOUR BATTERY</p>
               <p className="text-2xl">{batteryLevel || 'Loading...'}</p>
             </div>
             <i className="fas fa-battery-full text-blue-400 text-2xl"></i>
           </div>
         </div>
-
-        <section className="bg-gray-800 p-4 rounded-lg mb-4">
-          <h2 className="text-lg">Frequently Asked Questions (FAQ)</h2>
-          <div className="mt-2">
-            <div className="mb-2">
-              <h3 className="font-bold">1. Apakah ini berbayar?</h3>
-              <p>Tidak.</p>
-            </div>
-            <div className="mb-2">
-              <h3 className="font-bold">2. Cara pakai?</h3>
-              <p>Anda dapat menggunakan fitur kami di bagian docs.</p>
-            </div>
-            <div className="mb-2">
-              <h3 className="font-bold">3. Di mana tempat laporan bug / error?</h3>
-              <p>              Anda dapat menghubungi tim dukungan kami melalui halaman kontak.</p>
-            </div>
-          </div>
-        </section>
-
-        <section className="bg-gray-800 p-4 rounded-lg mb-4">
-          <h2 className="text-lg">ABOUT ME</h2>
-          <p>Saya hanya seorang pengembang pemula, jadi jangan dibully.</p>
-        </section>
 
         <div className="text-center mb-4">
           <p className="mb-2">Someone want to donate me?</p>
@@ -112,7 +95,7 @@ export default function Home() {
         </div>
 
         <div className="text-center">
-          <p className="text-sm">Made with <i className="fas fa-heart text-red-500"></i> by Sanz</p>
+          <p className="text-sm">Made with <i className="fas fa-heart text-red-500"></i> by Acedt</p>
         </div>
       </div>
     </div>
