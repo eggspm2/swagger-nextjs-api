@@ -90,7 +90,7 @@ export default function Home() {
         </div>
 
         <div className="text-center mt-6">
-          <p className="text-sm">Made with <i className="fas fa-heart text-red-500"></p>         
+          <p className="text-sm">Made with <i className="fas fa-heart text-red-500"></i        
           </p>
         </div>
       </div>
