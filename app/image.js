@@ -1,7 +1,7 @@
-// pages/image.js
+// app/image.js
 import { useState } from 'react';
 
-export default function ImageGenerator() {
+export default function image() {
   const [prompt, setPrompt] = useState('');
   const [height, setHeight] = useState('');
   const [width, setWidth] = useState('');
