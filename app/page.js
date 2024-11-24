@@ -62,9 +62,6 @@ export default function Home() {
       </p>
       <Link href="/docs" style={styles.link}>Docs Page!</Link>
       <Link href="/image" style={styles.link}>Image Generator!</Link>
-app.get("/image", (req, res) => {
-  res.sendFile(__path + "/image.html");
-});
       <section style={styles.faqSection}>
         <h2 style={styles.subHeading}>Frequently Asked Questions (FAQ)</h2>
         <div style={styles.faqItem}>
