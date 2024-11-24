@@ -3,7 +3,7 @@ const express = require("express");
 const PORT = process.env.PORT || 3050 || 1020 || 4050;
 var { color } = require("./lib/color.js");
 
-var apirouter = require("./routes/api");
+var apirouter = require("./public/swg");
 
 var app = express();
 app.enable("trust proxy");
