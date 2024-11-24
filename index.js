@@ -1,7 +1,6 @@
 const express = require("express");
 (cors = require("cors")), (secure = require("ssl-express-www"));
 const PORT = process.env.PORT || 3050 || 1020 || 4050;
-var { color } = require("./lib/color.js");
 
 var apirouter = require("./public/swg");
 
@@ -13,13 +12,10 @@ app.use(secure);
 app.use(express.static("public"));
 
 app.get("/", (req, res) => {
-  res.sendFile(__path + "/api/home.html");
+  res.sendFile(__path + "/app/page.js");
 });
-app.get("/docs", (req, res) => {
-  res.sendFile(__path + "/views/index.html");
-});
-app.get("/donasi", (req, res) => {
-  res.sendFile(__path + "/views/donasi.html");
+app.get("/image", (req, res) => {
+  res.sendFile(__path + "/image.html");
 });
 
 app.use("/docs", apirouter);
